@@ -69,14 +69,14 @@ const Dashboard = () => {
       </div>
       <CardInfo budgetList={budgetInfo} />
 
-      <div className='grid grid-cols-1 md:grid-cols-3 mt-6 gap-5'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 mt-6 gap-5'>
         <div className='md:col-span-2'>
           <BarChartDashboard budgetList={budgetInfo} />
           <ExpenseListTable expensesList={expensesList} refreshData={() => getBudgetInfo()} />
         </div>
-        <div className='grid gap-2'>
+        <div className='w-full'>
           <h2 className='font-bold text-xl'>Latest Budgets</h2>
-          <div>
+          <div className='flex flex-wrap gap-5'>
             {
               budgetInfo && (
                 budgetInfo.map((el: any) => (

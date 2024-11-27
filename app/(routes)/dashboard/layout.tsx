@@ -34,7 +34,7 @@ const DashboardLayout = ({children}: any) => {
 
   return (
     <div>
-      <div className='fixed hidden md:w-64 md:block'>
+      <div className=''>
         <SideNav />
       </div>
       <div className='md:ml-64'>

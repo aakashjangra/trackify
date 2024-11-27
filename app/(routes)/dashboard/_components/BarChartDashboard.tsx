@@ -6,7 +6,7 @@ const BarChartDashboard = ({ budgetList }: any) => {
     <div>
       <h2 className='font-bold text-xl mb-5'>Activity</h2>
       <div className='border rounded-lg p-5'>
-        <ResponsiveContainer width='100%' height={350}>
+        <ResponsiveContainer width={500} height={350}>
           <BarChart
             data={budgetList}
             margin={{
