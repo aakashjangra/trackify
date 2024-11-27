@@ -36,7 +36,6 @@ const SideNav = () => {
   ]
 
   const path = usePathname();
-  console.log(path);
 
   return (
     <div className=''>
@@ -47,7 +46,7 @@ const SideNav = () => {
             mb-2
             ${path == menu.path && '!text-primary !bg-green-100'}
           `}>
-            <Link href={menu.path} className='text-inherit'>
+            <Link href={menu.path} className='flex gap-2 text-inherit'>
               <menu.icon />
               {menu.name}
             </Link>
