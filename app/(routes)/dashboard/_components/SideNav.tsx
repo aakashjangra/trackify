@@ -1,7 +1,7 @@
 "use client"
 
 import { UserButton } from '@clerk/nextjs'
-import { LayoutGrid, PiggyBank, ReceiptText, ShieldCheck } from 'lucide-react'
+import { Crosshair, LayoutGrid, Menu, PiggyBank, ReceiptText, ShieldCheck, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -9,13 +9,30 @@ import React, { useState } from 'react'
 
 const SideNav = () => {
 
-  const path = usePathname();
+  const path = usePathname(); 
   const [openSideNav, setOpenSideNav] = useState<boolean>(false);
 
-  
+  const toggleMenu = () => {
+    setOpenSideNav(!openSideNav);
+  }
 
   return (
-    <div className='p-2 fixed hidden md:w-64 md:block'>
+    <>
+
+{/* menu control */}
+    <div className='fixed top-0 block md:hidden z-20 m-5 cursor-pointer hover:scale-[1.2]' onClick={toggleMenu}>
+      {
+        openSideNav ? (
+          <X />
+        ): (
+          <Menu />
+        )
+      }
+
+      </div>
+      {/* sidenav */}
+    <div className={`p-2 z-10 fixed ${openSideNav ? 'block border': 'hidden'} md:w-64 md:block bg-white h-screen`}>
+      
       <Image className='h-[50px] m-5' src={'/logo.svg'} alt="Logo" width={160} height={50} />
       <div>
         <h2 className={`flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-primary hover:bg-green-100
@@ -63,6 +80,7 @@ const SideNav = () => {
         </p>
       </div>
     </div>
+    </>
   )
 }
 
