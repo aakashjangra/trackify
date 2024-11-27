@@ -1,15 +1,16 @@
 "use client"
 
-import { UserButton } from '@clerk/nextjs'
-import { Crosshair, LayoutGrid, Menu, PiggyBank, ReceiptText, ShieldCheck, X } from 'lucide-react'
+import { UserButton, useUser } from '@clerk/nextjs'
+import { LayoutGrid, Menu, PiggyBank, ReceiptText, ShieldCheck, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const SideNav = () => {
 
   const path = usePathname(); 
+  const {isSignedIn} = useUser();
   const [openSideNav, setOpenSideNav] = useState<boolean>(false);
 
   const toggleMenu = () => {
@@ -31,9 +32,10 @@ const SideNav = () => {
 
       </div>
       {/* sidenav */}
-    <div className={`p-2 z-10 fixed ${openSideNav ? 'block border': 'hidden'} md:w-64 md:block bg-white h-screen`}>
-      
-      <Image className='h-[50px] m-5' src={'/logo.svg'} alt="Logo" width={160} height={50} />
+    <div className={`p-2 z-10 fixed ${openSideNav ? 'block border': 'hidden'} md:w-64 md:block bg-white h-screen`}>     
+      <Link href={`${isSignedIn ? '/dashboard': '/'}`}>
+        <Image className='h-[50px] m-5' src={'/logo.svg'} alt="Logo" width={160} height={50} />
+      </Link>
       <div>
         <h2 className={`flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-primary hover:bg-green-100
             mb-2

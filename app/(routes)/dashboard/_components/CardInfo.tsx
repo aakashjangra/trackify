@@ -12,13 +12,11 @@ const CardInfo = ({ budgetList }: any) => {
   }, [budgetList])
 
   const CalculateCardInfo = () => {
-    console.log(budgetList);
     let totalBudget_ = 0, totalSpend_ = 0;
-    budgetList.forEach(el => {
+    budgetList.forEach((el: { amount: number; totalSpend: number; }) => {
       totalBudget_ += el.amount;
       totalSpend_ += el.totalSpend;
     })
-    console.log(totalBudget_, totalSpend_)
 
     setTotalBudget(totalBudget_);
     setTotalSpend(totalSpend_);
@@ -54,7 +52,7 @@ const CardInfo = ({ budgetList }: any) => {
               </div>
             </div>
           ) : (
-            [1, 2, 3].map((el) => (
+            [1, 2, 3].map((el: number) => (
               <Skeleton key={el} />
             ))
           )

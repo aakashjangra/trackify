@@ -8,7 +8,7 @@ import React from 'react'
 
 const Header = () => {
 
-  const {isSignedIn, user} = useUser();
+  const {isSignedIn} = useUser();
 
   return (
     <div className='p-5 flex justify-between items-center border shadow-md'>

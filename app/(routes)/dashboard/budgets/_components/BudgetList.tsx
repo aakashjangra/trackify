@@ -1,12 +1,11 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useUser } from '@clerk/nextjs'
 import { db } from '@/db/dbConfig'
 import { Budgets, Expenses } from '@/db/schema'
 import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
-import { integer } from 'drizzle-orm/pg-core'
 import BudgetItem from './BudgetItem'
 import CreateBudget from './CreateBudget'
 import Skeleton from '@/app/_components/Skeleton'
@@ -42,12 +41,12 @@ const BudgetList = () => {
       <CreateBudget refreshData={() => getBudgetList()} />
   
       {
-        budgetList?.length >= 0 ? budgetList.map((budget: any, index: any) => (
-          <BudgetItem  budget={budget} />
+        budgetList?.length >= 0 ? budgetList.map((budget: any) => (
+          <BudgetItem key={budget.id} budget={budget} />
         ))
         : (
-          [1, 2, 3, 4, 5].map((el ,index) => (
-            <Skeleton key={index} />
+          [1, 2, 3, 4, 5].map((el) => (
+            <Skeleton key={el} />
           ))
         )
       }

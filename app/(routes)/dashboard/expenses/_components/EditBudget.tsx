@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from '@/components/ui/input'
 import EmojiPicker from 'emoji-picker-react'
-import { useUser } from '@clerk/nextjs'
 import { Budgets } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { db } from '@/db/dbConfig'
@@ -26,8 +25,6 @@ const EditBudget = ({budgetInfo, refreshData}: any) => {
 
   const [name, setName] = useState(budgetInfo?.name);
   const [amount, setAmount] = useState(budgetInfo?.amount);
-
-  const {user} = useUser();
 
   useEffect(() => {
     if(budgetInfo){

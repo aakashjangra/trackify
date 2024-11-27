@@ -7,9 +7,9 @@ import { Budgets, Expenses } from '@/db/schema';
 import { Loader } from 'lucide-react';
 import moment from 'moment';
 import React, { useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
-const AddExpense = ({budgetId, user, refreshData}: any) => {
+const AddExpense = ({budgetId, refreshData}: any) => {
   const [name, setName] = useState<string>('');
   const [amount, setAmount] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const AddExpense = ({budgetId, user, refreshData}: any) => {
 
   const addNewExpense = async () => {
     setLoading(true);
-    //@ts-ignore
+    //@ts-expect-error
     const result = await db.insert(Expenses).values({
       name,
       amount,

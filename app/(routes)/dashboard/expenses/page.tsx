@@ -30,7 +30,6 @@ const ExpensesScreen = () => {
     .orderBy(desc(Budgets.id));
 
     setBudgetList(result);
-    console.log('query result - ', result);
   }
 
   return (
@@ -40,12 +39,12 @@ const ExpensesScreen = () => {
 
 
        {
-        budgetList?.length >= 0 ? budgetList.map((budget: any, index: any) => (
-          <BudgetItem  budget={budget} />
+        budgetList?.length >= 0 ? budgetList.map((budget: any) => (
+          <BudgetItem key={budget.id} budget={budget} />
         ))
         : (
-          [1, 2, 3, 4, 5].map((el ,index) => (
-            <Skeleton key={index} />
+          [1, 2, 3, 4, 5].map((el) => (
+            <Skeleton key={el} />
           ))
         )
       }

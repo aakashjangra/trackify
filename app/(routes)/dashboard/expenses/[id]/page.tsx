@@ -5,13 +5,13 @@ import { Budgets, Expenses } from '@/db/schema';
 import { useUser } from '@clerk/nextjs';
 import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
 import { useParams, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import BudgetItem from '../../budgets/_components/BudgetItem';
 import Skeleton from '@/app/_components/Skeleton';
 import AddExpense from '../_components/AddExpense';
 import ExpenseListTable from '../_components/ExpenseListTable';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, PenBox, Trash } from 'lucide-react';
+import { ArrowLeft, Trash } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,7 +22,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 import { toast } from 'react-toastify';
 import EditBudget from '../_components/EditBudget';
 
@@ -48,7 +48,7 @@ const ExpensesInterface = () => {
     }).from(Budgets)
     .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
     .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress!))
-    //@ts-ignore
+    //@ts-expect-error
     .where(eq(Budgets.id, params.id))
     .groupBy(Budgets.id)
     .orderBy(Budgets.id);
@@ -60,6 +60,7 @@ const ExpensesInterface = () => {
 
   const getExpensesInfo = async () => {
     const result = await db.select().from(Expenses)
+    //@ts-expect-error
     .where(eq(Expenses.budgetId, params.id))
     .orderBy(desc(Expenses.id));
 
@@ -69,11 +70,13 @@ const ExpensesInterface = () => {
   const deleteBudget = async () => {
 
     const deleteExpenseResult = await db.delete(Expenses)
+    //@ts-expect-error
     .where(eq(Expenses.budgetId, params.id))
     .returning();
 
     if(deleteExpenseResult){ 
       const result = await db.delete(Budgets)
+      //@ts-expect-error
       .where(eq(Budgets.id, params.id))
       .returning();
 

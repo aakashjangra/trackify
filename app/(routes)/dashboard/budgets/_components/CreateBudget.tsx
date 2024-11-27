@@ -24,7 +24,6 @@ import { useUser } from '@clerk/nextjs'
 
 const CreateBudget = ({refreshData}: any) => {
 
-  
   const [emojiIcon, setEmojiIcon] = useState('🎉');
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
 
@@ -49,6 +48,7 @@ const CreateBudget = ({refreshData}: any) => {
       }
     } catch (error) {
       toast.error('Error creating budget');
+      console.log(error);
     }
     
   }

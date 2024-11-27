@@ -19,6 +19,7 @@ const DashboardLayout = ({children}: any) => {
   const checkUserBudgets = async () => {
     const result = await db.select()
     .from(Budgets)
+    //@ts-expect-error
     .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress));
 
     console.log(result);
